@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {IFilm} from "../models/models";
+import {IFilm} from "../models/reactComponentsModel";
 import {useActions} from "../hooks/actions";
 import {useAppSelector} from "../hooks/redux";
 import {Link} from "react-router-dom";
@@ -8,23 +8,20 @@ import {Link} from "react-router-dom";
 
 export function FilmCard({film}: { film: IFilm}) {
 
+    console.log('cOUUU')
     const {addFavourite, removeFavourite} = useActions()
     const {favourites} = useAppSelector(state => state.films)
-    const [isFav, setIsFav] = useState(favourites.includes(film.title))
-    const addToFavourite = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault()
-        setIsFav(true)
+    const isFav = favourites.includes(film.id)
+
+    const addToFavourite = () => {
         addFavourite(film.id)
     }
 
-    const removeFromFavourite = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault()
-        setIsFav(false)
+    const removeFromFavourite = () => {
         removeFavourite(film.id)
     }
-
+    console.log('this is gilm', film)
     return (
-
         <div>
             <div
                 className="rounded-lg shadow-lg bg-white max-w-sm block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
@@ -42,15 +39,15 @@ export function FilmCard({film}: { film: IFilm}) {
                 <div className="p-6 justify-between">
                     <h5 className="text-gray-900 text-xl font-medium mb-2">{film.title}</h5>
                     <p className="text-gray-700 text-base mb-4">
-                        Some quick example text to build on the card title and make up the bulk of the card's
-                        content.
+                        {film.description}
                     </p>
                     <div className="flex justify-content space-x-10 px-4 pt-4">
-                        <button type="button"
-                                className="inline-block px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
-                                onClick={addToFavourite}>Description
-                        </button>
-                        {!isFav && <button onClick={addToFavourite}>
+                        <Link key={film.id} to={`/card/${film.id}`}>
+                            <button type="button"
+                                    className="inline-block px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out">Description
+                            </button>
+                        </Link>
+                        {!isFav && <button type="button" onClick={addToFavourite}>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                                  stroke="#f94144" className="w-6 h-6">
                                 <path strokeLinecap="round" strokeLinejoin="round"
@@ -58,7 +55,7 @@ export function FilmCard({film}: { film: IFilm}) {
                             </svg>
                         </button>
                         }
-                        {isFav && <button onClick={removeFromFavourite}>
+                        {isFav && <button type="button" onClick={removeFromFavourite}>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#f94144" viewBox="0 0 24 24"
                                  strokeWidth="1.5"
                                  stroke="#f94144" className="w-6 h-6">

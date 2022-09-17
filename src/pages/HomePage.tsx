@@ -3,24 +3,32 @@ import { useSearchFilmsQuery} from "../store/films/films.api";
 import {useDebounce} from "../hooks/debounce";
 import {FilmCard} from "../components/FilmCard";
 import {log} from "util";
+import {Link, useNavigate} from "react-router-dom";
 
 export function HomePage() {
     const [search, setSearch] = useState('');
-    const [dropDown, setDropdown] = useState(false);
     const debounced = useDebounce(search);
     const {isLoading, isError, data} = useSearchFilmsQuery(debounced, {
         skip: debounced.length < 3,
     });
+    const dropDown = debounced.length > 3 && data?.length! > 0
+    const navigate = useNavigate();
     // const [fetchFilms, {isLoading: loadingFilms, data: films}] = useLazyGetFilmDescriptionQuery();
 
-    useEffect(() => {
-        setDropdown(debounced.length > 3 && data?.length! > 0)
-    }, [debounced])
-
     const clickHandler = (id: string) => {
-        // fetchFilms(id);
-        setDropdown(false)
+        navigate(`/card/${id}`)
     }
+
+    // const clickHandlerDropdown = (search: string) => {
+    //     return (
+    //         <div className="container mt-5 flex justify-center pt-5 mx-auto h-screen w-screen">
+    //             {isLoading && <p className="text-center">Films are loading</p>}
+    //             {data && <div className="flex  justify-center flex-wrap flex-initial gap-6">
+    //                 {data.map(film => <FilmCard film={film} key={film.id}/>)}
+    //             </div>}
+    //         </div>
+    //     )
+    // }
 
     return (
         <div>
@@ -33,6 +41,7 @@ export function HomePage() {
                                value={search}
                                onChange={e => setSearch(e.target.value)}/>
                         <button
+                            // onClick={() => clickHandlerDropdown(debounced)}
                             className="btn inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out flex items-center"
                             type="button" id="button-addon2">
                             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search"

@@ -9,30 +9,16 @@ interface Props {
 }
 
 export function FilmDescription(prop: Props) {
-    const [fetchFilms, {isLoading: loadingFilms, data, isError}] = useLazyGetFilmDescriptionQuery();
-
-    const {addFavourite, removeFavourite} = useActions()
-    const {favourites} = useAppSelector(state => state.films)
-    const [isFav, setIsFav] = useState(favourites.includes(data?.title!))
-    const addToFavourite = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault()
-        setIsFav(true)
-        addFavourite(data?.id!)
-    }
-
-    const removeFromFavourite = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault()
-        setIsFav(false)
-        removeFavourite(data?.id!)
-    }
+    const [fetchFilms, {isLoading, data, isError}] = useLazyGetFilmDescriptionQuery();
 
     useEffect(() => {
         fetchFilms(prop.title)
     }, [prop.title])
     return (
-        // {isLoading && <p>Data is loading</p>}
-        <div className="flex justify-center">
-            {/*<div className="flex flex-col md:flex-row md:max-w-xl rounded-lg bg-white shadow-lg">*/}
+        <>
+            {isLoading && <p>Data is loading</p>}
+            {data && <div className="flex justify-center">
+                {/*<div className="flex flex-col md:flex-row md:max-w-xl rounded-lg bg-white shadow-lg">*/}
                 <img
                     className=" w-full h-96 md:h-auto object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
                     src={data?.image!} alt=""/>
@@ -44,8 +30,10 @@ export function FilmDescription(prop: Props) {
                     <p className="text-gray-700 text-base mb-4">{data?.directors!}</p>
                     <p className="text-gray-600 text-xs">{data?.genres!}</p>
                 </div>
-            {/*</div>*/}
-        </div>
+                {/*</div>*/}
+            </div>}
+        </>
+
 
     )
 

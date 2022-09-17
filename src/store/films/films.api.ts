@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { IFilm, IWiki, ServerResponse } from "../../models/models";
+import { ServerResponse } from "../../models/serverModel";
+import {IWiki, IFilm} from "../../models/reactComponentsModel"
 
 export const filmsApi = createApi({
     reducerPath: 'films/api',
@@ -9,21 +10,13 @@ export const filmsApi = createApi({
     endpoints: build => ({
         searchFilms: build.query<IFilm[], string>({
             query: (search: string) => ({
-                url: `API/Search/k_5ibu41bt/${search}`,
-                // headers: {
-                //     'X-RapidAPI-Key': 'b96434e6eemsh51b33d6cd3ddee6p1e3e18jsn473a44ad3868',
-                //     'X-RapidAPI-Host': 'imdb8.p.rapidapi.com'
-                // },
-                // params: {
-                //     q: search
-                // }
+                url: `API/Search/k_9o9e7bo5/${search}`,
             }),
             transformResponse: (response: ServerResponse<IFilm>) => response.results
         }),
         getFilmDescription: build.query<IWiki, string>({
             query: (id: string) => ({
-                url: `en/API/Title/k_5ibu41bt/${id}`,
-                // https://imdb-api.com/en/API/Title/k_nl3485w3/tt0126029
+                url: `en/API/Title/k_9o9e7bo5/${id}`,
             })
         })
     })

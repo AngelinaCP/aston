@@ -10,9 +10,9 @@ function App() {
       <>
           <Navigation/>
           <Routes>
-              <Route path="/" element={<HomePage/>}></Route>
-              <Route path="/favourites" element={<FavouritesPage/>}></Route>
-              <Route path="/card/:id" element={<CardPage/>}></Route>
+              <Route path="/" element={<HomePage/>}/>
+              <Route path="/favourites" element={<FavouritesPage/>}/>
+              <Route path="/card/:id" element={<CardPage/>}/>
           </Routes>
       </>
 
