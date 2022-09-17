@@ -2,6 +2,7 @@ import React from 'react';
 import {Routes, Route} from "react-router-dom";
 import {HomePage} from "./pages/HomePage";
 import {FavouritesPage} from "./pages/FavouritesPage";
+import {CardPage} from "./pages/CardPage";
 import {Navigation} from "./components/Navigation";
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
           <Routes>
               <Route path="/" element={<HomePage/>}></Route>
               <Route path="/favourites" element={<FavouritesPage/>}></Route>
+              <Route path="/card/:id" element={<CardPage/>}></Route>
           </Routes>
       </>
 
