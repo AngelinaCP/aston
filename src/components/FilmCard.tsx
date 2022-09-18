@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 
 
 
-export function FilmCard({film}: { film: IFilm}) {
+export function FilmCard({film}: { film: any}) {
 
     const {addFavourite, removeFavourite} = useActions()
     const {favourites} = useAppSelector(state => state.films)

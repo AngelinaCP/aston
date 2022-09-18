@@ -13,7 +13,7 @@ export function FavouritesPage() {
     }
     return (
 
-                <div className="flex  justify-center flex-wrap flex-initial gap-6 pt-10 mx-auto h-screen w-screen">
+                <div className="flex justify-center flex-wrap flex-initial gap-6 pt-10 mx-auto h-screen w-screen">
                     {favourites.map(f => (
                         <FavouriteCard key={f} id={f}/>
                     ))

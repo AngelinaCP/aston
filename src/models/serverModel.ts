@@ -1,4 +1,5 @@
 import {PlotFull, PlotShort} from "./clientModel";
+import {BestFilmsItem} from "./reactComponentsModel";
 
 export interface ServerResponse<T> {
     searchType: string;
@@ -18,5 +19,10 @@ export interface Wikipedia {
     url: string;
     plotShort: PlotShort;
     plotFull: PlotFull;
+    errorMessage: string;
+}
+
+export interface BestFilms<T> {
+    items: T[];
     errorMessage: string;
 }
