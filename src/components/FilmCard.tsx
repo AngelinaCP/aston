@@ -8,19 +8,20 @@ import {Link} from "react-router-dom";
 
 export function FilmCard({film}: { film: IFilm}) {
 
-    console.log('cOUUU')
     const {addFavourite, removeFavourite} = useActions()
     const {favourites} = useAppSelector(state => state.films)
     const isFav = favourites.includes(film.id)
+    const LS_FAV_KEY = 'rfk'
 
     const addToFavourite = () => {
         addFavourite(film.id)
+        localStorage.setItem(LS_FAV_KEY, JSON.stringify([...favourites, film.id]));
     }
 
     const removeFromFavourite = () => {
         removeFavourite(film.id)
+        localStorage.setItem(LS_FAV_KEY, JSON.stringify(favourites.filter(f => f !== film.id)));
     }
-    console.log('this is gilm', film)
     return (
         <div>
             <div

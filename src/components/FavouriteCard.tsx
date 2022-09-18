@@ -14,9 +14,12 @@ export function FavouriteCard(prop: Props) {
     const { removeFavourite } = useActions()
     const {favourites} = useAppSelector(state => state.films)
     const isFav = favourites.includes(prop.id)
+    const LS_FAV_KEY = 'rfk'
+    // console.log(data?.title!)
 
     const removeFromFavourite = () => {
         removeFavourite(data?.id!)
+        localStorage.setItem(LS_FAV_KEY, JSON.stringify(favourites.filter(f => f !== data?.id!)));
     }
 
     useEffect(() => {

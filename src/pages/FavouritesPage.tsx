@@ -11,7 +11,6 @@ export function FavouritesPage() {
             <p className="center">No items</p>
         )
     }
-
     return (
 
                 <div className="flex  justify-center flex-wrap flex-initial gap-6 pt-10 mx-auto h-screen w-screen">
