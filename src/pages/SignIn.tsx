@@ -2,7 +2,11 @@ import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {defaultFormFields} from "./SignUp";
 
-export function SignIn() {
+interface Props {
+    setLoggedIn: (name: string) => void
+}
+
+export function SignIn({setLoggedIn}: Props) {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { email, password } = formFields;
     const navigate = useNavigate()
@@ -15,7 +19,7 @@ export function SignIn() {
     };
 
     const signIn = (event: any) => {
-        const {email: checkEmail, password: checkPassword} = JSON.parse(localStorage.getItem(email) ?? '[]');
+        const {email: checkEmail, password: checkPassword, name} = JSON.parse(localStorage.getItem(email) ?? '[]');
         if (checkEmail !== email) {
             event.preventDefault();
             setWrongEmailError(true)
@@ -26,6 +30,7 @@ export function SignIn() {
             setWrongEmailError(false)
         }
         else {
+            setLoggedIn(name)
             navigate('/')
         }
     }

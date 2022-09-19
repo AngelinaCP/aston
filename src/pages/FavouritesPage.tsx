@@ -1,6 +1,7 @@
 import React from 'react'
 import {useAppSelector} from "../hooks/redux";
 import {FavouriteCard} from "../components/FavouriteCard";
+import {FilmCard} from "../components/FilmCard";
 
 
 export function FavouritesPage() {
@@ -13,12 +14,12 @@ export function FavouritesPage() {
     }
     return (
 
-                <div className="flex justify-center flex-wrap flex-initial gap-6 pt-10 mx-auto h-screen w-screen">
-                    {favourites.map(f => (
-                        <FavouriteCard key={f} id={f}/>
-                    ))
-                    }
-                </div>
+        <div className="justify-center flex-wrap flex-initial flex gap-6">
+            {favourites.map(f => (
+                <FavouriteCard key={f} id={f}/>
+            ))
+            }
+        </div>
 
 
     )

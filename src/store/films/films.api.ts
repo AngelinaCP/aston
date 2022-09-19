@@ -10,18 +10,18 @@ export const filmsApi = createApi({
     endpoints: build => ({
         searchFilms: build.query<IFilm[], string>({
             query: (search: string) => ({
-                url: `API/Search/k_lcpdw451/${search}`,
+                url: `API/Search/k_nhoj0rl8/${search}`,
             }),
             transformResponse: (response: ServerResponse<IFilm>) => response.results
         }),
         getFilmDescription: build.query<IWiki, string>({
             query: (id: string) => ({
-                url: `en/API/Title/k_lcpdw451/${id}`,
+                url: `en/API/Title/k_nhoj0rl8/${id}`,
             })
         }),
         getBestFilms: build.query<BestFilmsItem[], void>({
             query: () => ({
-                url: `en/API/MostPopularMovies/k_lcpdw451`,
+                url: `en/API/MostPopularMovies/k_nhoj0rl8`,
             }),
             transformResponse: (response: BestFilms<BestFilmsItem>) => response.items
         })
