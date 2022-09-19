@@ -9,7 +9,7 @@ export const defaultFormFields = {
 
 export function SignUp() {
     const [formFields, setFormFields] = useState(defaultFormFields);
-    const { email } = formFields;
+    const { email, name } = formFields;
     const navigate = useNavigate()
     const [signedInError, setSignedInError] = useState(false)
     const handleChange = (event: any) => {
@@ -27,6 +27,7 @@ export function SignUp() {
         else {
             localStorage.setItem(email, JSON.stringify(formFields))
             setSignedInError(false)
+            localStorage.setItem('current_user', name);
             navigate('/')
         }
     }

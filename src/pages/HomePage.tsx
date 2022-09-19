@@ -6,14 +6,13 @@ import {useNavigate} from "react-router-dom";
 import {Pagination} from "../components/Pagination";
 
 export function HomePage() {
+    //здесь будет красиво попозже
     const [currentPage, setCurrentPage] = useState(1);
-    const [showSearchedCard, setShowSearchedCards] = useState(false)
     const [search, setSearch] = useState('');
     const debounced = useDebounce(search);
     const {isLoading, isError, data} = useSearchFilmsQuery(debounced, {
         skip: debounced.length < 3,
     });
-    const newArr = localStorage.getItem('history') ?? '[]';
     const {isLoading: bestFilmsLoading, isError: bestFilmsError, data: bestFilms} = useGetBestFilmsQuery();
     const navigate = useNavigate();
     const dropDown = Boolean(debounced.length > 3 && data?.length! > 0)

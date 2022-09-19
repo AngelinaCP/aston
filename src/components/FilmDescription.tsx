@@ -1,8 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {useLazyGetFilmDescriptionQuery} from "../store/films/films.api";
-import {useActions} from "../hooks/actions";
-import {useAppSelector} from "../hooks/redux";
-import {Link} from "react-router-dom";
 
 interface Props {
     id: string

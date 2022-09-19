@@ -2,17 +2,12 @@ import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {defaultFormFields} from "./SignUp";
 
-interface Props {
-    setLoggedIn: (name: string) => void
-}
-
-export function SignIn({setLoggedIn}: Props) {
+export function SignIn() {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { email, password } = formFields;
     const navigate = useNavigate()
     const [wrongPasswordError, setWrongPasswordError] = useState(false)
     const [wrongEmailError, setWrongEmailError] = useState(false)
-    const [error, setError] = useState(false)
     const handleChange = (event: any) => {
         const { name, value } = event.target;
         setFormFields({ ...formFields, [name]: value });
@@ -30,8 +25,9 @@ export function SignIn({setLoggedIn}: Props) {
             setWrongEmailError(false)
         }
         else {
-            setLoggedIn(name)
-            navigate('/')
+            localStorage.setItem('current_user', name);
+            navigate('/');
+            window.location.reload()
         }
     }
 
