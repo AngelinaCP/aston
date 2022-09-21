@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { ServerResponse } from "../../models/serverModel";
-import {IWiki, IFilm} from "../../models/reactComponentsModel"
+import {BestFilms, ServerResponse} from "../../models/serverModel";
+import {IWiki, IFilm, BestFilmsItem} from "../../models/reactComponentsModel"
 
 export const filmsApi = createApi({
     reducerPath: 'films/api',
@@ -10,16 +10,22 @@ export const filmsApi = createApi({
     endpoints: build => ({
         searchFilms: build.query<IFilm[], string>({
             query: (search: string) => ({
-                url: `API/Search/k_9o9e7bo5/${search}`,
+                url: `API/Search/k_nhoj0rl8/${search}`,
             }),
             transformResponse: (response: ServerResponse<IFilm>) => response.results
         }),
         getFilmDescription: build.query<IWiki, string>({
             query: (id: string) => ({
-                url: `en/API/Title/k_9o9e7bo5/${id}`,
+                url: `en/API/Title/k_nhoj0rl8/${id}`,
             })
+        }),
+        getBestFilms: build.query<BestFilmsItem[], void>({
+            query: () => ({
+                url: `en/API/MostPopularMovies/k_nhoj0rl8`,
+            }),
+            transformResponse: (response: BestFilms<BestFilmsItem>) => response.items
         })
     })
 })
 
-export const { useSearchFilmsQuery, useLazyGetFilmDescriptionQuery } = filmsApi
+export const { useSearchFilmsQuery, useLazyGetFilmDescriptionQuery, useGetBestFilmsQuery } = filmsApi

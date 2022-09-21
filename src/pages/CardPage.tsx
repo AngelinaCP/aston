@@ -6,8 +6,7 @@ export function CardPage() {
 
     return (
         <>
-            {/*<h1>hrllo</h1>*/}
-            <FilmDescription key={id} title={id!}/>
+            <FilmDescription key={id} id={id!}/>
         </>
     )
 }
