@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {useLazyGetFilmDescriptionQuery} from "../store/films/films.api";
+import PropTypes from "prop-types";
 
 interface Props {
     id: string
 }
 
-export function FilmDescription({id}: Props) {
+function FilmDescription({id}: Props) {
     const [fetchFilms, {isLoading, data, isError}] = useLazyGetFilmDescriptionQuery();
 
     useEffect(() => {
@@ -53,5 +54,10 @@ export function FilmDescription({id}: Props) {
                 </div>}
         </>
     )
-
 }
+
+FilmDescription.propTypes = {
+    id: PropTypes.string
+}
+
+export default FilmDescription;

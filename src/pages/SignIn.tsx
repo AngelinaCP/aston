@@ -1,6 +1,7 @@
-import {useState} from "react";
+import {ChangeEvent, useContext, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {defaultFormFields} from "./SignUp";
+import {AuthContext} from "../components/AuthContext";
 
 export function SignIn() {
     const [formFields, setFormFields] = useState(defaultFormFields);
@@ -8,13 +9,14 @@ export function SignIn() {
     const navigate = useNavigate()
     const [wrongPasswordError, setWrongPasswordError] = useState(false)
     const [wrongEmailError, setWrongEmailError] = useState(false)
-    const handleChange = (event: any) => {
+    const value = useContext(AuthContext);
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setFormFields({ ...formFields, [name]: value });
     };
-
     const signIn = (event: any) => {
-        const {email: checkEmail, password: checkPassword, name} = JSON.parse(localStorage.getItem(email) ?? '[]');
+        const {email: checkEmail, password: checkPassword, name} = JSON.parse(localStorage.getItem(email) as string);
+
         if (checkEmail !== email) {
             event.preventDefault();
             setWrongEmailError(true)
@@ -25,7 +27,7 @@ export function SignIn() {
             setWrongEmailError(false)
         }
         else {
-            localStorage.setItem('current_user', name);
+            value?.login(name, email, password, true)
             navigate('/');
             window.location.reload()
         }
@@ -77,8 +79,6 @@ export function SignIn() {
                             >
                                 Sign in
                             </button>
-
-
                         </form>
                     </div>
                 </div>

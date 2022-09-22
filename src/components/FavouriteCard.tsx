@@ -1,24 +1,26 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {useLazyGetFilmDescriptionQuery} from "../store/films/films.api";
 import {useActions} from "../hooks/actions";
 import {useAppSelector} from "../hooks/redux";
 import {Link} from "react-router-dom";
+import PropTypes from "prop-types";
+import {AuthContext} from "./AuthContext";
+import {RFK} from "../utils/utils";
 
 interface Props {
     id: string
 }
 
-export function FavouriteCard({id}: Props) {
+function FavouriteCard({id}: Props) {
     const [fetchFilms, {isLoading: loadingFilms, data, isError}] = useLazyGetFilmDescriptionQuery();
 
     const {removeFavourite} = useActions()
     const {favourites} = useAppSelector(state => state.films)
-    const isFav = favourites.includes(id)
-    const LS_FAV_KEY = 'rfk'
+    const isFav = favourites.includes(id);
 
     const removeFromFavourite = () => {
         removeFavourite(data?.id!)
-        localStorage.setItem(LS_FAV_KEY, JSON.stringify(favourites.filter(f => f !== data?.id!)));
+        localStorage.setItem(RFK, JSON.stringify(favourites.filter(f => f !== data?.id!)));
     }
 
     useEffect(() => {
@@ -62,5 +64,10 @@ export function FavouriteCard({id}: Props) {
         </div>}
         </>
     )
-
 }
+
+FavouriteCard.propTypes = {
+    id: PropTypes.string
+}
+
+export default FavouriteCard;

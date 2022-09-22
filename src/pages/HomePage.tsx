@@ -25,7 +25,6 @@ export function HomePage() {
     const indexOfFirstPost = indexOfLastPost - postPerPage;
     const currentPosts = bestFilms?.slice!(indexOfFirstPost, indexOfLastPost)
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
-
     return (
         <div>
             <div className="flex justify-center mt-10">

@@ -1,12 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {useContext} from "react";
+import {AuthContext} from "../../components/AuthContext";
+import {RFK} from "../../utils/utils";
 
 interface FilmsState {
-    favourites: string[]
+    favourites: string[],
 }
 
-const LS_FAV_KEY = 'rfk'
 const initialState: FilmsState = {
-    favourites: JSON.parse(localStorage.getItem(LS_FAV_KEY) ?? '[]')
+    favourites: JSON.parse(localStorage.getItem(RFK) as string ?? '[]')
 }
 
 export const filmsSlice = createSlice({

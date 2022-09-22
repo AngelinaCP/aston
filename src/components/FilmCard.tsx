@@ -1,25 +1,23 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {useActions} from "../hooks/actions";
 import {useAppSelector} from "../hooks/redux";
 import {Link} from "react-router-dom";
 import {BestFilmsItem} from "../models/reactComponentsModel";
-
+import {RFK} from "../utils/utils";
 
 export function FilmCard({film}: { film: BestFilmsItem}) {
-
     const {addFavourite, removeFavourite} = useActions()
     const {favourites} = useAppSelector(state => state.films)
     const isFav = favourites.includes(film.id)
-    const LS_FAV_KEY = 'rfk'
 
     const addToFavourite = () => {
         addFavourite(film.id)
-        localStorage.setItem(LS_FAV_KEY, JSON.stringify([...favourites, film.id]));
+        localStorage.setItem(RFK, JSON.stringify([...favourites, film.id]));
     }
 
     const removeFromFavourite = () => {
         removeFavourite(film.id)
-        localStorage.setItem(LS_FAV_KEY, JSON.stringify(favourites.filter(f => f !== film.id)));
+        localStorage.setItem(RFK, JSON.stringify(favourites.filter(f => f !== film.id)));
     }
     return (
         <div
@@ -66,7 +64,4 @@ export function FilmCard({film}: { film: BestFilmsItem}) {
         </div>
     );
 }
-
-
-
 
