@@ -61,6 +61,7 @@ export function HomePage() {
                     </div>
                 </div>
             </div>
+            <h3 className="text-center text-3xl font-bold mb-8">Top 250 films</h3>
             <div className=" container mt-5  justify-center pt-5 mx-auto h-screen w-screen">
                 {bestFilmsLoading && <p className="text-center">Films are loading</p>}
                 <div className="block mb-6 text-center">

@@ -2,10 +2,16 @@ import {useContext} from "react";
 import {AuthContext} from "../components/AuthContext";
 
 
-function GetKey() {
+function FavouritesKey() {
     const {email} = JSON.parse(localStorage.getItem('current_user') as string);
-    console.log(email)
     return 'rfk' + email;
 }
 
-export const RFK = GetKey()
+function HistoryKey() {
+    const {email} = JSON.parse(localStorage.getItem('current_user') as string);
+    return 'hk' + email;
+}
+
+
+export const RFK = FavouritesKey()
+export const HK = HistoryKey()
