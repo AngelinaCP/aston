@@ -16,30 +16,20 @@ export function SignIn() {
     };
     const signIn = (event: any) => {
         const user = JSON.parse(localStorage.getItem(email) as string);
-        if (user && user.email === email) {
-            value?.login(user.name, user.email, user.password, true)
-                navigate('/');
-                window.location.reload()
-        } else {
-            console.log('user doesnt exisfffffffft')
-        }
 
-        // const {email: checkEmail, password: checkPassword, name} = JSON.parse(localStorage.getItem(email) as string);
-        // console.log(checkEmail)
-        // if (checkEmail !== email) {
-        //     event.preventDefault();
-        //     setWrongEmailError(true)
-        //     setWrongPasswordError(false)
-        // } else if (checkPassword !== password) {
-        //     event.preventDefault()
-        //     setWrongPasswordError(true)
-        //     setWrongEmailError(false)
-        // }
-        // else {
-        //     value?.login(name, email, password, true)
-        //     navigate('/');
-        //     window.location.reload()
-        // }
+        if (user && user.email === email && user.password === password) {
+            value?.login(user.name, user.email, user.password, true)
+            navigate('/');
+            window.location.reload()
+        } else if (user && user.email !== email) {
+            event.preventDefault()
+            setWrongEmailError(true)
+            setWrongPasswordError(false)
+        } else {
+            event.preventDefault()
+            setWrongPasswordError(true)
+            setWrongEmailError(false)
+        }
     }
 
     return (
