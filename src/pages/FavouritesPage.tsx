@@ -6,7 +6,7 @@ export function FavouritesPage() {
     const {favourites} = useAppSelector(state => state.films)
     if (favourites.length === 0) {
         return (
-            <p className="center">No items</p>
+            <p className="text-center text-3xl font-bold mb-8">No items</p>
         )
     }
     return (

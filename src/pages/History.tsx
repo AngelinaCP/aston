@@ -6,7 +6,7 @@ export function History() {
     const {history} = useAppSelector(state => state.films)
     if (history.length === 0) {
         return (
-            <p className="center">No history</p>
+            <p className="text-center text-3xl font-bold mb-8">No history</p>
         )
     }
 
