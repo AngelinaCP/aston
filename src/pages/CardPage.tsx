@@ -5,8 +5,6 @@ export function CardPage() {
     const {id} = useParams()
 
     return (
-        <>
-            <FilmDescription key={id} id={id!}/>
-        </>
+        <FilmDescription key={id} id={id!}/>
     )
 }

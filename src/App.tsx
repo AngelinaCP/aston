@@ -15,25 +15,24 @@ function App() {
     const auth = value?.auth;
     return (
         <>
-            <AuthProvider>
-            <Navigation/>
             <ErrorBoundary>
                 <Routes>
-                    <Route path="/" element={<HomePage/>}/>
-                    <Route path="/sign-in" element={<SignIn/>}/>
-                    <Route path="/sign-up" element={<SignUp/>}/>
-                    <Route
-                        path="/favourites"
-                        element={ auth?.getAuth ? <FavouritesPage /> : <Navigate to="/sign-in" /> }
-                    />
-                    <Route
-                        path="/history"
-                        element={ auth?.getAuth ? <History /> : <Navigate to="/sign-in" /> }
-                    />
-                    <Route path="/card/:id" element={<CardPage/>}/>
+                    <Route path='/' element={<Navigation/>}>
+                        <Route index element={ <HomePage />}/>
+                        <Route path="/sign-in" element={<SignIn/>}/>
+                        <Route path="/sign-up" element={<SignUp/>}/>
+                        <Route
+                            path="/favourites"
+                            element={auth?.getAuth ? <FavouritesPage/> : <Navigate to="/sign-in"/>}
+                        />
+                        <Route
+                            path="/history"
+                            element={auth?.getAuth ? <History/> : <Navigate to="/sign-in"/>}
+                        />
+                        <Route path="/card/:id" element={<CardPage/>}/>
+                    </Route>
                 </Routes>
             </ErrorBoundary>
-                </AuthProvider>
         </>
 
     );

@@ -19,12 +19,10 @@ function FavouriteCard({id}: Props) {
 
     const addToFavourite = () => {
         addFavourite(data?.id!)
-        localStorage.setItem(RFK, JSON.stringify([...favourites, data?.id!]));
     }
 
     const removeFromFavourite = () => {
         removeFavourite(data?.id!)
-        localStorage.setItem(RFK, JSON.stringify(favourites.filter(f => f !== data?.id!)));
     }
 
     useEffect(() => {

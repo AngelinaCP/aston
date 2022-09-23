@@ -5,42 +5,55 @@ import {AuthContext} from "../components/AuthContext";
 
 export function SignIn() {
     const [formFields, setFormFields] = useState(defaultFormFields);
-    const { email, password } = formFields;
+    const {email, password} = formFields;
     const navigate = useNavigate()
     const [wrongPasswordError, setWrongPasswordError] = useState(false)
     const [wrongEmailError, setWrongEmailError] = useState(false)
     const value = useContext(AuthContext);
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = event.target;
-        setFormFields({ ...formFields, [name]: value });
+        const {name, value} = event.target;
+        setFormFields({...formFields, [name]: value});
     };
     const signIn = (event: any) => {
-        const {email: checkEmail, password: checkPassword, name} = JSON.parse(localStorage.getItem(email) as string);
+        const user = JSON.parse(localStorage.getItem(email) as string);
+        if (user && user.email === email) {
+            value?.login(user.name, user.email, user.password, true)
+                navigate('/');
+                window.location.reload()
+        } else {
+            console.log('user doesnt exisfffffffft')
+        }
 
-        if (checkEmail !== email) {
-            event.preventDefault();
-            setWrongEmailError(true)
-            setWrongPasswordError(false)
-        } else if (checkPassword !== password) {
-            event.preventDefault()
-            setWrongPasswordError(true)
-            setWrongEmailError(false)
-        }
-        else {
-            value?.login(name, email, password, true)
-            navigate('/');
-            window.location.reload()
-        }
+        // const {email: checkEmail, password: checkPassword, name} = JSON.parse(localStorage.getItem(email) as string);
+        // console.log(checkEmail)
+        // if (checkEmail !== email) {
+        //     event.preventDefault();
+        //     setWrongEmailError(true)
+        //     setWrongPasswordError(false)
+        // } else if (checkPassword !== password) {
+        //     event.preventDefault()
+        //     setWrongPasswordError(true)
+        //     setWrongEmailError(false)
+        // }
+        // else {
+        //     value?.login(name, email, password, true)
+        //     navigate('/');
+        //     window.location.reload()
+        // }
     }
 
     return (
         <section className="h-screen">
-            <div className="container px-6 py-12 h-full">
+            <div className="px-6 py-12 h-full">
                 <div className="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
                     <div className="md:w-8/12 lg:w-5/12 lg:ml-20">
                         <form onSubmit={signIn}>
-                            {wrongEmailError && <div className="form-control block w-full px-4 py-2 text-xl font-normal text-red-700 bg-white bg-clip-padding">No such email</div>}
-                            {wrongPasswordError && <div className="form-control block w-full px-4 py-2 text-xl font-normal text-red-700 bg-white bg-clip-padding">Wrong password</div>}
+                            {wrongEmailError && <div
+                                className="form-control block w-full px-4 py-2 text-xl font-normal text-red-700 bg-white bg-clip-padding">No
+                                such email</div>}
+                            {wrongPasswordError && <div
+                                className="form-control block w-full px-4 py-2 text-xl font-normal text-red-700 bg-white bg-clip-padding">Wrong
+                                password</div>}
                             <div className="mb-6">
                                 <input
                                     type="email"

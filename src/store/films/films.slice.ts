@@ -1,6 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {useContext} from "react";
-import {AuthContext} from "../../components/AuthContext";
 import {RFK, HK} from "../../utils/utils";
 
 interface FilmsState {

@@ -9,9 +9,7 @@ export function History() {
             <p className="center">No history</p>
         )
     }
-    console.log(history.map(f => {
-        console.log(f)
-    }))
+
     return (
         <div className="justify-center flex-wrap flex-initial flex gap-6">
             {history.map(f => (

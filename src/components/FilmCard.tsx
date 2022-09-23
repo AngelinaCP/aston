@@ -3,34 +3,32 @@ import {useActions} from "../hooks/actions";
 import {useAppSelector} from "../hooks/redux";
 import {Link} from "react-router-dom";
 import {BestFilmsItem} from "../models/reactComponentsModel";
-import {RFK, HK} from "../utils/utils";
 
 export function FilmCard({film}: { film: BestFilmsItem}) {
     const {addFavourite, removeFavourite, addHistory} = useActions()
     const {favourites} = useAppSelector(state => state.films)
-    const {history} = useAppSelector(state => state.films)
     const isFav = favourites.includes(film.id)
 
     const addToFavourite = () => {
         addFavourite(film.id)
-        localStorage.setItem(RFK, JSON.stringify([...favourites, film.id]));
     }
 
     const removeFromFavourite = () => {
         removeFavourite(film.id)
-        localStorage.setItem(RFK, JSON.stringify(favourites.filter(f => f !== film.id)));
     }
 
-    const addToHistory = () => {
-        addHistory(film.id)
-        localStorage.setItem(HK, JSON.stringify([...history, film.id]));
-    }
+    // const addToHistory = () => {
+    //     addHistory(film.id)
+    //     localStorage.setItem(HK, JSON.stringify([...history, film.id]));
+    // }
 
     return (
         <div
             className="rounded-lg shadow-lg bg-white w-96 block p-6 mb-15 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
             <a href={`/card/${film.id}`} className="bg-blue-300">
-                <div onClick={addToHistory} className="hover:translate-x-1 hover:-translate-y-1 delay-50 duration-100" style={{
+                <div
+                    // onClick={addToHistory}
+                    className="hover:translate-x-1 hover:-translate-y-1 delay-50 duration-100" style={{
                     height: '500px', width: "100%",
                     backgroundImage: `url(${film.image})`,
                     backgroundRepeat: 'no-repeat',
@@ -46,7 +44,7 @@ export function FilmCard({film}: { film: BestFilmsItem}) {
                 <div className="flex justify-content space-x-10 px-4 pt-4">
                     <Link key={film.id} to={`/card/${film.id}`}>
                         <button type="button"
-                                onClick={addToHistory}
+                                // onClick={addToHistory}
                                 className="inline-block px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out">Description
                         </button>
                     </Link>
