@@ -1,6 +1,6 @@
 import React from 'react'
 import {useAppSelector} from "../hooks/redux";
-import {FavouriteCard} from "../components/FavouriteCard";
+import FavouriteCard from "../components/FavouriteCard";
 
 export function FavouritesPage() {
     const {favourites} = useAppSelector(state => state.films)

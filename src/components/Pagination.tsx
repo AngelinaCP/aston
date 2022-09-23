@@ -1,9 +1,4 @@
-interface Props {
-    currentPage: number
-    postsPerPage: number,
-    totalPosts: number,
-    paginate: (number: number) => void
-}
+import {Props} from "../models/reactComponentsModel";
 
 export function Pagination({currentPage, postsPerPage, totalPosts, paginate}: Props) {
     const totalPages = Math.ceil(totalPosts / postsPerPage);

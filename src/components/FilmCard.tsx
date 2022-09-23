@@ -1,31 +1,28 @@
 import React from 'react';
-import {useActions} from "../hooks/actions";
 import {useAppSelector} from "../hooks/redux";
 import {Link} from "react-router-dom";
+import {useActions} from "../hooks/actions";
 import {BestFilmsItem} from "../models/reactComponentsModel";
 
-
 export function FilmCard({film}: { film: BestFilmsItem}) {
-
     const {addFavourite, removeFavourite} = useActions()
     const {favourites} = useAppSelector(state => state.films)
     const isFav = favourites.includes(film.id)
-    const LS_FAV_KEY = 'rfk'
 
     const addToFavourite = () => {
         addFavourite(film.id)
-        localStorage.setItem(LS_FAV_KEY, JSON.stringify([...favourites, film.id]));
     }
 
     const removeFromFavourite = () => {
         removeFavourite(film.id)
-        localStorage.setItem(LS_FAV_KEY, JSON.stringify(favourites.filter(f => f !== film.id)));
     }
+
     return (
         <div
             className="rounded-lg shadow-lg bg-white w-96 block p-6 mb-15 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
             <a href={`/card/${film.id}`} className="bg-blue-300">
-                <div className="hover:translate-x-1 hover:-translate-y-1 delay-50 duration-100" style={{
+                <div
+                    className="hover:translate-x-1 hover:-translate-y-1 delay-50 duration-100" style={{
                     height: '500px', width: "100%",
                     backgroundImage: `url(${film.image})`,
                     backgroundRepeat: 'no-repeat',
@@ -66,7 +63,4 @@ export function FilmCard({film}: { film: BestFilmsItem}) {
         </div>
     );
 }
-
-
-
 

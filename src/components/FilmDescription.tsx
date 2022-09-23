@@ -1,13 +1,26 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {useLazyGetFilmDescriptionQuery} from "../store/films/films.api";
+import PropTypes from "prop-types";
+import {useActions} from "../hooks/actions";
+import {useAppSelector} from "../hooks/redux";
 
 interface Props {
     id: string
 }
 
-export function FilmDescription({id}: Props) {
-    const [fetchFilms, {isLoading, data, isError}] = useLazyGetFilmDescriptionQuery();
+function FilmDescription({id}: Props) {
+    const [fetchFilms, {isLoading, data}] = useLazyGetFilmDescriptionQuery();
+    const {addFavourite, removeFavourite} = useActions()
+    const {favourites} = useAppSelector(state => state.films)
+    const isFav = favourites.includes(id)
 
+    const addToFavourite = () => {
+        addFavourite(id)
+    }
+
+    const removeFromFavourite = () => {
+        removeFavourite(id)
+    }
     useEffect(() => {
         fetchFilms(id)
     }, [id])
@@ -40,18 +53,34 @@ export function FilmDescription({id}: Props) {
                                 <p className="text-gray-700 text-base mb-4">Rating: imDb{data?.imDbRating!}</p>
                                 <p className="text-gray-700 text-base mb-4">Directors: {data?.directors!}</p>
                                 <p className="text-gray-600 text-xs">{data?.genres!}</p>
-                                <p className="text-gray-600 text-xs">{data?.runtimeStr!}</p>
-                                <p className="text-3xl font-medium text-gray-600 dark:text-white mt-8 md:mt-10"></p>
-                                {/*<div className="mt-6">*/}
-                                {/*    <button onClick={removeFromFavourite}*/}
-                                {/*        className="text-xl underline text-gray-800 dark:text-white dark:hover:text-gray-200 capitalize hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800">Remove from favourites*/}
-                                {/*    </button>*/}
-                                {/*</div>*/}
+                                <p className="text-gray-600 text-xs p-2">{data?.runtimeStr!}</p>
+                                {!isFav && <button className="p-5" type="button" onClick={addToFavourite}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
+                                         stroke="#f94144" className="w-6 h-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                              d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+                                    </svg>
+                                </button>
+                                }
+                                {isFav && <button className="p-5" type="button" onClick={removeFromFavourite}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#f94144" viewBox="0 0 24 24"
+                                         strokeWidth="1.5"
+                                         stroke="#f94144" className="w-6 h-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                              d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+                                    </svg>
+                                </button>
+                                }
                             </div>
                         </div>
                     </div>
                 </div>}
         </>
     )
-
 }
+
+FilmDescription.propTypes = {
+    id: PropTypes.string
+}
+
+export default FilmDescription;

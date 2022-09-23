@@ -1,14 +1,15 @@
-import { configureStore } from "@reduxjs/toolkit";
+import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import { filmsApi } from "./films/films.api";
-import { setupListeners } from "@reduxjs/toolkit/query";
 import { filmsReducer } from "./films/films.slice";
+import {LocalStorageMiddleware} from "../utils/localStorageMiddleware";
 
-export const store = configureStore({
-    reducer: {
-        [filmsApi.reducerPath]: filmsApi.reducer,
+const rootReducer = combineReducers( {
+    [filmsApi.reducerPath]: filmsApi.reducer,
         films: filmsReducer
-    },
-    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(filmsApi.middleware)
+})
+export const store = configureStore({
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(filmsApi.middleware, LocalStorageMiddleware),
 })
 
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof rootReducer>

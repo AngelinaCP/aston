@@ -1,12 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {RFK, HK} from "../../utils/utils";
 
 interface FilmsState {
-    favourites: string[]
+    favourites: string[],
+    history: string[]
 }
 
-const LS_FAV_KEY = 'rfk'
 const initialState: FilmsState = {
-    favourites: JSON.parse(localStorage.getItem(LS_FAV_KEY) ?? '[]')
+    favourites: JSON.parse(localStorage.getItem(RFK) as string ?? '[]'),
+    history: JSON.parse(localStorage.getItem(HK) as string ?? '[]')
 }
 
 export const filmsSlice = createSlice({
@@ -18,6 +20,9 @@ export const filmsSlice = createSlice({
         },
         removeFavourite(state, action: PayloadAction<string>) {
             state.favourites = state.favourites.filter(f => f !== action.payload);
+        },
+        addHistory(state, action: PayloadAction<string>) {
+            state.history.push(action.payload);
         }
     }
 })
