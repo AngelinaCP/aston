@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {useGetBestFilmsQuery, useSearchFilmsQuery} from "../store/films/films.api";
 import {useDebounce} from "../hooks/debounce";
 import {FilmCard} from "../components/FilmCard";
 import {useNavigate} from "react-router-dom";
 import {Pagination} from "../components/Pagination";
-import {HK} from "../utils/utils";
-import {useAppSelector} from "../hooks/redux";
+
 import {useActions} from "../hooks/actions";
 
 export function HomePage() {
@@ -15,14 +14,12 @@ export function HomePage() {
     const {isLoading, isError, data} = useSearchFilmsQuery(debounced, {
         skip: debounced.length < 3,
     });
-    const {isLoading: bestFilmsLoading, isError: bestFilmsError, data: bestFilms} = useGetBestFilmsQuery();
+    const {isLoading: bestFilmsLoading, data: bestFilms} = useGetBestFilmsQuery();
     const navigate = useNavigate();
     const dropDown = Boolean(debounced.length > 3 && data?.length! > 0)
     const {addHistory} = useActions()
-    const {history} = useAppSelector(state => state.films)
     const clickHandler = (id: string) => {
         addHistory(id)
-        // localStorage.setItem(HK, JSON.stringify([...history, id]));
         navigate(`/card/${id}`)
     }
     //for pagination
@@ -56,6 +53,7 @@ export function HomePage() {
                     </div>
                 </div>
             </div>
+
             <h3 className="text-center text-3xl font-bold mb-8">Top 250 films</h3>
             <div className=" container mt-5  justify-center pt-5 mx-auto h-screen w-screen">
                 {bestFilmsLoading && <p className="text-center">Films are loading</p>}

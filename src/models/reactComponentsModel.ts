@@ -10,6 +10,7 @@ import {
 } from "./clientModel";
 import {Wikipedia} from "./serverModel";
 
+
 export interface IFilm {
     id: string;
     resultType: string;
@@ -79,4 +80,11 @@ export interface IWiki {
     tvSeriesInfo?: any;
     tvEpisodeInfo?: any;
     errorMessage?: any;
+}
+
+export interface Props {
+    currentPage: number
+    postsPerPage: number,
+    totalPosts: number,
+    paginate: (number: number) => void
 }

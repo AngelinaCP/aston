@@ -1,5 +1,4 @@
 import {PlotFull, PlotShort} from "./clientModel";
-import {BestFilmsItem} from "./reactComponentsModel";
 
 export interface ServerResponse<T> {
     searchType: string;

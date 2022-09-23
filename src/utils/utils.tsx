@@ -1,3 +1,6 @@
+import {useActions} from "../hooks/actions";
+import {useAppSelector} from "../hooks/redux";
+
 function FavouritesKey() {
     const user = JSON.parse(localStorage.getItem('current_user') as string);
     if (user) {

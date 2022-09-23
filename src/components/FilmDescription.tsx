@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {useLazyGetFilmDescriptionQuery} from "../store/films/films.api";
 import PropTypes from "prop-types";
 
@@ -7,7 +7,7 @@ interface Props {
 }
 
 function FilmDescription({id}: Props) {
-    const [fetchFilms, {isLoading, data, isError}] = useLazyGetFilmDescriptionQuery();
+    const [fetchFilms, {isLoading, data}] = useLazyGetFilmDescriptionQuery();
 
     useEffect(() => {
         fetchFilms(id)
@@ -42,12 +42,6 @@ function FilmDescription({id}: Props) {
                                 <p className="text-gray-700 text-base mb-4">Directors: {data?.directors!}</p>
                                 <p className="text-gray-600 text-xs">{data?.genres!}</p>
                                 <p className="text-gray-600 text-xs">{data?.runtimeStr!}</p>
-                                <p className="text-3xl font-medium text-gray-600 dark:text-white mt-8 md:mt-10"></p>
-                                {/*<div className="mt-6">*/}
-                                {/*    <button onClick={removeFromFavourite}*/}
-                                {/*        className="text-xl underline text-gray-800 dark:text-white dark:hover:text-gray-200 capitalize hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800">Remove from favourites*/}
-                                {/*    </button>*/}
-                                {/*</div>*/}
                             </div>
                         </div>
                     </div>

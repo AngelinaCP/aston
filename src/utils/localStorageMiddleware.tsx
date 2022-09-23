@@ -15,6 +15,5 @@ export const LocalStorageMiddleware: Middleware<{}, RootState> = (state) => (nex
     else if (history && action.type === 'films/addHistory') {
         localStorage.setItem(HK, JSON.stringify([...history, action.payload]));
     }
-    // console.log("Middleware triggered:", action);
     next(action);
 }
