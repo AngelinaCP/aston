@@ -1,7 +1,7 @@
 import React from 'react';
-import {useActions} from "../hooks/actions";
 import {useAppSelector} from "../hooks/redux";
 import {Link} from "react-router-dom";
+import {useActions} from "../hooks/actions";
 import {BestFilmsItem} from "../models/reactComponentsModel";
 
 export function FilmCard({film}: { film: BestFilmsItem}) {

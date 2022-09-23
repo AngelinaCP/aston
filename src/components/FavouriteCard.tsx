@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
-import {useLazyGetFilmDescriptionQuery} from "../store/films/films.api";
 import {useActions} from "../hooks/actions";
+import {useLazyGetFilmDescriptionQuery} from "../store/films/films.api";
 import {useAppSelector} from "../hooks/redux";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";

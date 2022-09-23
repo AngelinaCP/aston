@@ -1,10 +1,7 @@
 import React, {useState} from 'react'
-import {useGetBestFilmsQuery, useSearchFilmsQuery} from "../store/films/films.api";
+import {useSearchFilmsQuery} from "../store/films/films.api";
 import {useDebounce} from "../hooks/debounce";
-import {FilmCard} from "../components/FilmCard";
 import {useNavigate} from "react-router-dom";
-import {Pagination} from "../components/Pagination";
-
 import {useActions} from "../hooks/actions";
 import {BestFilms} from "../components/BestFilms";
 

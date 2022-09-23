@@ -1,7 +1,7 @@
-import {Pagination} from "./Pagination";
-import {FilmCard} from "./FilmCard";
 import React, {useState} from "react";
 import {useGetBestFilmsQuery} from "../store/films/films.api";
+import {Pagination} from "./Pagination";
+import {FilmCard} from "./FilmCard";
 
 export function BestFilms() {
     const [currentPage, setCurrentPage] = useState(1);

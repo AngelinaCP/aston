@@ -1,4 +1,6 @@
 import React, {useContext} from 'react';
+import {AuthContext} from "./components/AuthContext";
+import {ErrorBoundary} from "./components/ErrorBoundary";
 import {Routes, Route, Navigate} from "react-router-dom";
 import {HomePage} from "./pages/HomePage";
 import {FavouritesPage} from "./pages/FavouritesPage";
@@ -6,8 +8,6 @@ import {CardPage} from "./pages/CardPage";
 import {Navigation} from "./components/Navigation";
 import {SignIn} from "./pages/SignIn";
 import {SignUp} from "./pages/SignUp";
-import {ErrorBoundary} from "./components/ErrorBoundary";
-import {AuthContext, AuthProvider} from "./components/AuthContext";
 import {History} from "./pages/History";
 
 function App() {

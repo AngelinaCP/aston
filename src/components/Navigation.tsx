@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
-import {Link, Outlet} from "react-router-dom";
 import {AuthContext} from "./AuthContext";
+import {Link, Outlet} from "react-router-dom";
 
 export function Navigation() {
     const value = useContext(AuthContext);
