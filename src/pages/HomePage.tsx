@@ -6,15 +6,14 @@ import {useNavigate} from "react-router-dom";
 import {Pagination} from "../components/Pagination";
 
 import {useActions} from "../hooks/actions";
+import {BestFilms} from "../components/BestFilms";
 
 export function HomePage() {
-    const [currentPage, setCurrentPage] = useState(1);
     const [search, setSearch] = useState('');
     const debounced = useDebounce(search);
     const {isLoading, isError, data} = useSearchFilmsQuery(debounced, {
         skip: debounced.length < 3,
     });
-    const {isLoading: bestFilmsLoading, data: bestFilms} = useGetBestFilmsQuery();
     const navigate = useNavigate();
     const dropDown = Boolean(debounced.length > 3 && data?.length! > 0)
     const {addHistory} = useActions()
@@ -22,12 +21,6 @@ export function HomePage() {
         addHistory(id)
         navigate(`/card/${id}`)
     }
-    //for pagination
-    const postPerPage = 12;
-    const indexOfLastPost = currentPage * postPerPage;
-    const indexOfFirstPost = indexOfLastPost - postPerPage;
-    const currentPosts = bestFilms?.slice!(indexOfFirstPost, indexOfLastPost)
-    const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
     return (
         <div>
             <div className="flex justify-center mt-10">
@@ -53,22 +46,7 @@ export function HomePage() {
                     </div>
                 </div>
             </div>
-
-            <h3 className="text-center text-3xl font-bold mb-8">Top 250 films</h3>
-            <div className=" container mt-5  justify-center pt-5 mx-auto h-screen w-screen">
-                {bestFilmsLoading && <p className="text-center">Films are loading</p>}
-                <div className="block mb-6 text-center">
-                    <Pagination currentPage={currentPage} postsPerPage={postPerPage} totalPosts={bestFilms?.length!}
-                                paginate={paginate}/>
-                </div>
-                <div className="justify-center flex-wrap flex-initial flex gap-6">
-                    {currentPosts && currentPosts.map(film => <FilmCard film={film} key={film.id}/>)}
-                </div>
-                <div className="block mt-10 mb-20 text-center ">
-                    <Pagination currentPage={currentPage} postsPerPage={postPerPage} totalPosts={bestFilms?.length!}
-                                paginate={paginate}/>
-                </div>
-            </div>
+            <BestFilms/>
         </div>
     )
 }
