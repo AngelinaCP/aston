@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {store} from "./store";
+import { store } from "./store";
 import App from './App';
-import {BrowserRouter} from "react-router-dom";
-import {Provider} from "react-redux";
-import {AuthProvider} from "./components/AuthContext";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { AuthProvider } from "./components/AuthContext";
 import './index.css';
 
 const root = ReactDOM.createRoot(
@@ -15,7 +15,7 @@ root.render(
         <React.StrictMode>
             <BrowserRouter>
                 <AuthProvider>
-                    <App/>
+                    <App />
                 </AuthProvider>
             </BrowserRouter>
         </React.StrictMode>

@@ -1,11 +1,11 @@
-import {combineReducers, configureStore} from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { filmsApi } from "./films/films.api";
 import { filmsReducer } from "./films/films.slice";
-import {LocalStorageMiddleware} from "../utils/localStorageMiddleware";
+import { LocalStorageMiddleware } from "../utils/localStorageMiddleware";
 
-const rootReducer = combineReducers( {
+const rootReducer = combineReducers({
     [filmsApi.reducerPath]: filmsApi.reducer,
-        films: filmsReducer
+    films: filmsReducer
 })
 export const store = configureStore({
     reducer: rootReducer,

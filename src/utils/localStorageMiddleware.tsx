@@ -1,6 +1,6 @@
-import {Middleware} from "@reduxjs/toolkit";
-import {RFK, HK} from "./utils";
-import {RootState} from "../store";
+import { Middleware } from "@reduxjs/toolkit";
+import { RFK, HK } from "./utils";
+import { RootState } from "../store";
 
 export const LocalStorageMiddleware: Middleware<{}, RootState> = (state) => (next) => (action) => {
     const favourites = state.getState().films.favourites;

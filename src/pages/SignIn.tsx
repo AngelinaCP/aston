@@ -1,18 +1,18 @@
-import {ChangeEvent, useContext, useState} from "react";
-import {useNavigate} from "react-router-dom";
-import {defaultFormFields} from "./SignUp";
-import {AuthContext} from "../components/AuthContext";
+import { ChangeEvent, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { defaultFormFields } from "./SignUp";
+import { AuthContext } from "../components/AuthContext";
 
 export function SignIn() {
     const [formFields, setFormFields] = useState(defaultFormFields);
-    const {email, password} = formFields;
+    const { email, password } = formFields;
     const navigate = useNavigate()
     const [wrongPasswordError, setWrongPasswordError] = useState(false)
     const [wrongEmailError, setWrongEmailError] = useState(false)
     const value = useContext(AuthContext);
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const {name, value} = event.target;
-        setFormFields({...formFields, [name]: value});
+        const { name, value } = event.target;
+        setFormFields({ ...formFields, [name]: value });
     };
     const signIn = (event: any) => {
         const user = JSON.parse(localStorage.getItem(email) as string);
@@ -21,14 +21,14 @@ export function SignIn() {
             value?.login(user.name, user.email, user.password, true)
             navigate('/');
             window.location.reload()
-        } else if (user && user.email !== email) {
+        } else if (user && user.password !== password) {
             event.preventDefault()
-            setWrongEmailError(true)
-            setWrongPasswordError(false)
+            setWrongEmailError(false)
+            setWrongPasswordError(true)
         } else {
             event.preventDefault()
-            setWrongPasswordError(true)
-            setWrongEmailError(false)
+            setWrongPasswordError(false)
+            setWrongEmailError(true)
         }
     }
 

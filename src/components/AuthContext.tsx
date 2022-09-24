@@ -1,4 +1,4 @@
-import React, {createContext, useEffect, useState} from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 interface Auth {
     name: string;
@@ -20,7 +20,7 @@ interface Props {
 
 export const AuthContext = createContext<AuthContext | null>(null);
 
-export const AuthProvider: React.FC<Props> = ({children}) => {
+export const AuthProvider: React.FC<Props> = ({ children }) => {
     const initialState = JSON.parse(localStorage.getItem('current_user') as string) || {
         name: '',
         email: '',
@@ -51,7 +51,7 @@ export const AuthProvider: React.FC<Props> = ({children}) => {
     }
 
     return (
-        <AuthContext.Provider value={{auth, setAuth, logout, login}}>
+        <AuthContext.Provider value={{ auth, setAuth, logout, login }}>
             {children}
         </AuthContext.Provider>
     )

@@ -1,4 +1,4 @@
-import {PlotFull, PlotShort} from "./clientModel";
+import { PlotFull, PlotShort } from "./clientModel";
 
 export interface ServerResponse<T> {
     searchType: string;

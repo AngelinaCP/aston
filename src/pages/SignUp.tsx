@@ -1,6 +1,6 @@
-import React, {ChangeEvent, useContext, useState} from "react";
-import {useNavigate} from "react-router-dom";
-import {AuthContext} from "../components/AuthContext";
+import { ChangeEvent, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../components/AuthContext";
 
 export const defaultFormFields = {
     name: '',
@@ -10,17 +10,17 @@ export const defaultFormFields = {
 
 export function SignUp() {
     const [formFields, setFormFields] = useState(defaultFormFields);
-    const {email, name, password} = formFields;
+    const { email, name, password } = formFields;
     const value = useContext(AuthContext);
     const navigate = useNavigate()
     const [signedInError, setSignedInError] = useState(false)
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const {name, value} = event.target;
-        setFormFields({...formFields, [name]: value});
+        const { name, value } = event.target;
+        setFormFields({ ...formFields, [name]: value });
     };
 
     const signUp = (event: any): void => {
-        const {email: checkEmail} = JSON.parse(localStorage.getItem(email) ?? '[]')
+        const { email: checkEmail } = JSON.parse(localStorage.getItem(email) ?? '[]')
         if (checkEmail === email) {
             event.preventDefault()
             setSignedInError(true)

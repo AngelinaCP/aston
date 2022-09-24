@@ -8,7 +8,7 @@ import {
     StarList,
     WriterList
 } from "./clientModel";
-import {Wikipedia} from "./serverModel";
+import { Wikipedia } from "./serverModel";
 
 
 export interface IFilm {

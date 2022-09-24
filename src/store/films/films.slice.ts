@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {RFK, HK} from "../../utils/utils";
+import { RFK, HK } from "../../utils/utils";
 
 interface FilmsState {
     favourites: string[],
